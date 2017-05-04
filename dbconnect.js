@@ -18,7 +18,7 @@ module.exports = {
 		rows.forEach(function (row) {  
             data.push(row.username, row.password); 
         })
-	})
+	});
 	return data;
 }
 };

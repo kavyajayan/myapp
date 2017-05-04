@@ -22,12 +22,12 @@ app.post('/',function (req,res){
  var uname = req.body.uname;
  console.log(uname);
  console.log(data);
- for(var i=0; i<data.length; i++){
-	if(data[i][0]==uname){
+ for(var i=0; i<data.length; i+=2){
+	if(data[i]==uname){
 		console.log("Entering uname equal loop")
 		flag1=1;
 		console.log(flag1)	
-		if(data[i][1]==pwd){
+		if(data[i+1]==pwd){
 			flag2=1
 		}
 		else{
@@ -45,8 +45,7 @@ app.post('/',function (req,res){
 	else{
 		if (flag2==0){
 			res.send("Invalid password");
-			setTimeout((function() {res.sendFile(path.join('/home/kavya/myApp'+'/login.html'))}), 2000);
-
+          res.sendFile(path.join('/home/kavya/myApp'+'/login.html'));
 		}
 		else{
 			return res.send("Successfully logged in")
