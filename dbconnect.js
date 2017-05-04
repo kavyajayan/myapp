@@ -16,7 +16,7 @@ module.exports = {
 	fetch: function() {
  	db.all('SELECT username, password from LOGIN',function(err,rows){
 		rows.forEach(function (row) {  
-            data.push(row.first_name, row.last_name);  
+            data.push(row.username, row.password);  
         })  
     });   
 

@@ -20,12 +20,10 @@ app.post('/',function (req,res){
  var flag2 = 0
  var pwd = req.body.pwd;
  var uname = req.body.uname;
- console.log(uname);
- console.log(data);
- for(var i=0; i<data.length; i++){
-	if(data[i][0]==uname){
+ for(var i=0; i<data.length; i+=2){
+	if(data[i]==uname){
 		flag1=1;	
-		if(data[i][1]==pwd){
+		if(data[i+1]==pwd){
 			flag2=1
 		}
 		else{
