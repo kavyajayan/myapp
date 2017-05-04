@@ -56,6 +56,7 @@ app.get('/register', function(req,res){
 
 app.post('/register', function(req,res){
  db.insert(req.body.uname,req.body.pwd)
+ return res.redirect('/')
 })
  
 app.listen(3000, function() {

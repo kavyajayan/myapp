@@ -14,10 +14,13 @@ module.exports = {
 
 
 	fetch: function() {
- db.each('SELECT username, password from LOGIN', function(a){
-  data.push(a)
- })
- return data
+ 	db.all('SELECT username, password from LOGIN',function(err,rows){
+		rows.forEach(function (row) {  
+            data.push(row.first_name, row.last_name);  
+        })  
+    });   
+
+ 	return data
 	}
 };
 
