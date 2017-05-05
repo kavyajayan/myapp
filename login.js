@@ -7,7 +7,7 @@ var bodyParser=require('body-parser')
 
 db.create()
 app.get('/', function (req, res){
-	res.sendFile(path.join('/home/kavya/myApp'+'/login.html'))
+	return res.sendFile(path.join('/home/kavya/myApp'+'/login.html'))
 })
 
 app.use(bodyParser.urlencoded({
@@ -15,48 +15,44 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.post('/',function (req,res){
- var data = db.fetch()
+ var data= db.fetch()
+ console.log(data)
  var flag1 = 0
  var flag2 = 0
  var pwd = req.body.pwd;
  var uname = req.body.uname;
- console.log(uname);
- console.log(data);
- for(var i=0; i<data.length; i+=2){
-	if(data[i]==uname){
-		console.log("Entering uname equal loop")
-		flag1=1;
-		console.log(flag1)	
-		if(data[i+1]==pwd){
+ for(var i=0; i<data.length; i+=1){
+	if(data[i][0]==uname){
+		flag1=1;	
+		if(data[i][1]==pwd){
+			console.log("Entering pwd correct loop")
 			flag2=1
 		}
 		else{
+			console.log("Entering inval pwd loop1")
 			flag2=0
 		}
 	}
 	else{
-		console.log("Entering uname unequal loop")
 		flag1=0
 	}
+ }
 	if (flag1==0){
-	console.log(flag1)
-		return res.redirect('/register')
+		 return res.redirect('/register')
 	}
 	else{
 		if (flag2==0){
-			res.send("Invalid password");
-          res.sendFile(path.join('/home/kavya/myApp'+'/login.html'));
+			console.log("Entering inval pwd loop2")
+			return res.sendFile(path.join('/home/kavya/myApp/'+'invalpwd.html'))
 		}
 		else{
 			return res.send("Successfully logged in")
 		}
 	}
- }
- return res.redirect('/register')
 })
 
 app.get('/register', function(req,res){
- res.sendFile(path.join('/home/kavya/myApp'+'/register.html'))
+ return res.sendFile(path.join('/home/kavya/myApp/'+'register.html'))
 })
 
 app.post('/register', function(req,res){

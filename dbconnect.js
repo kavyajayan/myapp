@@ -16,9 +16,11 @@ module.exports = {
 	fetch: function() {
  	db.all('SELECT username, password from LOGIN',function(err,rows){
 		rows.forEach(function (row) {  
-            data.push(row.username, row.password); 
-        })
-	});
-	return data;
-}
+            data.push([row.username, row.password]);  
+        })  
+    });   
+
+ 	return data
+	}
 };
+
